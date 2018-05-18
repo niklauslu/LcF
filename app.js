@@ -10,7 +10,7 @@ const bodyParser = require('body-parser') // 处理请求中body的内容
 const methodOverride = require('method-override') //支持更多的请求方式（PUT,DELETE）等
 const session = require('express-session') // session中间件
 
-// 使用ejs末班引擎
+// 使用ejs模板引擎
 app.set('view engine', 'ejs')
 // 设置模板目录
 app.set('views', path.join(__dirname, './public/views'))
