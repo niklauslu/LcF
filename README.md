@@ -1,4 +1,4 @@
-#Lc Framework(LcF自用web开发框架) 
+# Lc Framework(LcF自用web开发框架) 
 
 > 站在巨人的肩膀上
 
@@ -14,7 +14,7 @@
 + Javascript(ES6)
 
 ### 开发技术文档
-移步至[wiki](/niklauslu/LcF/wiki)
+移步至[WIKI](https://github.com/niklauslu/LcF/wiki)
 
 
 ### License
