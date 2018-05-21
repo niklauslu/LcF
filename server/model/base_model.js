@@ -21,12 +21,17 @@ class BaseModel {
   }
 
   /**
-   * 事务
+   * 事务支持
    */
   async getTrans() {
     return await DB.transaction()
   }
 
+  /**
+   * 原生sql查询
+   * @param {*} sql 
+   * @param {*} replacements 
+   */
   async query(sql, replacements = null) {
     let opts = {}
     opts.type = DB.QueryTypes.SELECT
