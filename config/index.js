@@ -5,12 +5,7 @@ let config = {
 
   // 数据库mysql配置
   db: {
-    host: '59939c0a9a983.gz.cdb.myqcloud.com',
-    port: 5579,
-    dbname: 'cc_sneaker',
-    username: 'root',
-    password: 'Lucong19890512',
-    maxLimit: 10,
+    
   },
 
   // session配置
