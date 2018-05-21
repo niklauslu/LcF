@@ -267,5 +267,5 @@ app.set('view engine' , 'html')
 
 ### 其他相关
 
-+ 日志处理单独见[日志处理]()
++ 日志处理单独见[日志处理](https://github.com/niklauslu/LcF/wiki/%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86)
 + model整合数据库见[Sequelize整合mysql数据库]()

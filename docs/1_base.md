@@ -50,3 +50,49 @@ project
 > 在`mac`和`linux`环境，设置`logs`,`public/uploads`文件夹权限为`777`
 
 ### 架构设计
+
+### 配置文件
+
+`config/index.js`
+
+```js
+const fs = require('fs')
+const path = require('path')
+
+let config = {
+
+  // 数据库mysql配置
+  db: {
+    host: '', 
+    port: 3306,
+    dbname: '',
+    username: '',
+    password: '',
+    maxLimit: 10,
+  },
+
+  // session配置
+  session : {
+    secret : ''
+  },
+
+  // web站点port
+  port : 8000
+
+}
+
+// 配置文件可根据部署环境的不同加载对应环境的配置文件
+let env = process.env.NODE_ENV ? process.env.NODE_ENV : ''
+
+if (env) {
+  if (fs.existsSync(path.join(__dirname, './' + env + '.js'))) {
+    let extendsConfig = require('./' + env)
+    if (extendsConfig) {
+      config = Object.assign(config, extendsConfig)
+    }
+  }
+
+}
+
+module.exports = config
+```

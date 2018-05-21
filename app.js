@@ -4,6 +4,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const config = require('./config') // 加载配置文件
 
 // 中间件
 const bodyParser = require('body-parser') // 处理请求中body的内容
@@ -23,7 +24,7 @@ app.use('/uploads', express.static(path.join(__dirname, './public/uploads')))
 app.use(session({
   resave: true, 
   saveUninitialized: true, 
-  secret: '1234567890ascdefg' // session加密
+  secret: config.session.secret // session加密
 }))
 
 // 处理请求中body的内容 (req.body)
@@ -57,7 +58,7 @@ app.use(ErrorMid.logErrors) // 错误日志输出
 app.use(ErrorMid.errorHandler) // 错误处理 500
 app.use(ErrorMid.error404) // 404错误
 
-let port = 9000
+let port = config.port
 app.listen(port, () => {
   console.log('A web server listening at port:%s', port);
 });
