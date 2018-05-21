@@ -41,6 +41,10 @@ app.use(bodyParser.text({
 // 支持更多的请求方式 (?_method=put)
 app.use(methodOverride('_method'))
 
+// 记录请求日志
+const logReqMid = require('./app/middleware/log_req')
+app.use(logReqMid)
+
 // 添加控制层逻辑
 const controller = require('./lib/boot')
 controller(app, {
