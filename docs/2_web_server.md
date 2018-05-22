@@ -1,4 +1,4 @@
-# 构建一个MVC架构web服务
+# 构建web服务
 
 ### 1.利用express搭建简单的web服务
 
