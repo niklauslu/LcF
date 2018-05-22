@@ -14,7 +14,15 @@ let config = {
   },
 
   // web站点port
-  port : 9000
+  port : 9000,
+
+  // rpc配置
+  rpc : {
+    host : '',
+    port : '',
+    protos_path: path.join(__dirname , './../grpc/protos'),
+    routes_path: path.join(__dirname, './../server/routes')
+  }
 
 }
 
