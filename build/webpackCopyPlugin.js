@@ -9,8 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 let patterns = []
 
-let ejsFromPath = path.join(__dirname, '../src/ejs')
-let ejsToPath = path.join(__dirname , '../dist/ejs')
+let ejsFromPath = path.join(__dirname, '../src/template')
+let ejsToPath = path.join(__dirname , '../public/views')
 
 console.log('ejsFromPath ============', ejsFromPath)
 patterns.push({
