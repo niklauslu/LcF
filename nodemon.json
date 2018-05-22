@@ -10,11 +10,12 @@
   },
   "watch": [
     "app/",
-    "sdk/",
-    "lib/",
     "config/",
+    "lib/",
+    "src/template",
+    "server/",
     "app.js",
-    "api.js"
+    "server.js"
 
   ],
   "ignore": [

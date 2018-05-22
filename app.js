@@ -5,6 +5,24 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const config = require('./config') // 加载配置文件
+const env = process.env.NODE_ENV
+
+// webpack
+if (env == 'dev') {
+  const webpack = require('webpack');
+  const merge = require('webpack-merge')
+  const webpackDevMiddleware = require('webpack-dev-middleware')
+  const webpackConfBase = require('./build/webpack.base')
+
+  const webpackConf = merge(webpackConfBase, {
+    devtool: 'inline-source-map'
+  })
+  const compiler = webpack(webpackConf)
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: '/assets/'
+  }))
+  
+}
 
 // 中间件
 const bodyParser = require('body-parser') // 处理请求中body的内容
@@ -14,10 +32,12 @@ const session = require('express-session') // session中间件
 // 使用ejs模板引擎
 app.set('view engine', 'ejs')
 // 设置模板目录
-app.set('views', path.join(__dirname, './public/views'))
+app.set('views', path.join(__dirname, env == 'dev' ? './src/template' : './public/views'))
 
 // 静态文件
 app.use('/assets', express.static(path.join(__dirname, './public/assets')))
+app.use('/js', express.static(path.join(__dirname, './public/assets/js')))
+app.use('/css', express.static(path.join(__dirname, './public/assets/css')))
 app.use('/uploads', express.static(path.join(__dirname, './public/uploads')))
 
 // session 支持

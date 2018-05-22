@@ -4,7 +4,7 @@
 const path = require('path')
 const webpack = require('webpack')
 
-const DIST = 'dist'
+const DIST = 'public/assets'
 const DIST_OUTPUT_PATH = '../' + DIST
 const DIST_CLEAN_PATH = DIST
 const DIST_PATH = path.resolve(__dirname, DIST_OUTPUT_PATH) // 所有输出文件的目标路径
@@ -26,7 +26,6 @@ const extractCSS = new ExtractTextPlugin(CSS_OUTPUT_PATH + CssFileName)
 const extractLESS = new ExtractTextPlugin(CSS_OUTPUT_PATH + CssFileName)
 
 const webpackEntrys = require('./webpackEntrys') // 获取所有entry
-
 
 let config = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -69,10 +68,10 @@ let config = {
     new CleanWebpackPlugin([DIST_CLEAN_PATH], {
       root: path.join(__dirname , '../')
     }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: "src/view/index.html"
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: "src/view/index.html"
+    // }),
     new webpack.ProvidePlugin({
       $: 'jquery'
     })
