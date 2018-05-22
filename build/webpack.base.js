@@ -12,14 +12,15 @@ const JS_OUTPUT_PATH = 'js/'
 const IMG_OUTPUT_PATH = 'images/'
 const CSS_OUTPUT_PATH = 'css/'
 
-const PUBLIC_PATH = '/'
+const PUBLIC_PATH = '/assets/'
 
 const HASH = false
 const CssFileName = HASH ? '[name].[hash].css' : '[name].css'
 const JsFileName = HASH ? '[name].[chunkhash].js' : '[name].js'
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const extractCSS = new ExtractTextPlugin(CSS_OUTPUT_PATH + CssFileName)
@@ -29,7 +30,9 @@ const webpackEntrys = require('./webpackEntrys') // 获取所有entry
 
 let config = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-  entry: webpackEntrys,
+  entry: webpackEntrys({
+    hot: true
+  }),
   output: {
     filename: JS_OUTPUT_PATH + JsFileName,
     path: DIST_PATH,
@@ -90,7 +93,6 @@ let config = {
 
 }
 
-const webpackCopyPlugin = require('./webpackCopyPlugin') // copy操作
-config.plugins.push(webpackCopyPlugin())
+
 
 module.exports = config

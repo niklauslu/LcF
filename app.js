@@ -4,24 +4,56 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const fs = require('fs')
 const config = require('./config') // 加载配置文件
-const env = process.env.NODE_ENV
+const env = process.env.NODE_ENV ? process.env.NODE_ENV :'production'
+console.log('NODE_ENV:' + env)
 
 // webpack
 if (env == 'dev') {
   const webpack = require('webpack');
   const merge = require('webpack-merge')
   const webpackDevMiddleware = require('webpack-dev-middleware')
+  const webpackHotMiddleware = require('webpack-hot-middleware')
   const webpackConfBase = require('./build/webpack.base')
 
   const webpackConf = merge(webpackConfBase, {
-    devtool: 'inline-source-map'
+    devtool: 'inline-source-map',
+    plugins: [
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoEmitOnErrorsPlugin()
+    ]
   })
   const compiler = webpack(webpackConf)
   app.use(webpackDevMiddleware(compiler, {
-    publicPath: '/assets/'
+    publicPath: '/assets/',
+    quiet: true //向控制台显示任何内容
+  }))
+  app.use(webpackHotMiddleware(compiler , {
+    log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000
   }))
   
+}else{
+  // 正式环境部署
+  
+  if (!fs.existsSync(path.join(__dirname , './public/assets'))) {
+    console.log('请运行打包命令：npm run build')
+    process.exit()
+    // const { exec } = require('child_process')
+    // exec('npm run build', (error, stdout, stderr) => {
+    //   if (error) {
+    //     console.error(`exec error: ${error}`);
+    //     return;
+    //   }
+    //   console.log(`stdout: ${stdout}`);
+    //   console.log(`stderr: ${stderr}`);
+
+    //   console.log('部署打包 end !!!')
+    //   fs.writeFileSync(path.join(assetsPath , 'version.json') , JSON.stringify({version : version}))
+    // })
+    
+  }
 }
 
 // 中间件
