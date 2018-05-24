@@ -1,3 +1,5 @@
 import { server } from './grpc'
 
-server.run()
+const config = require('./config').rpc.server
+
+server.run(config.port , config.host)

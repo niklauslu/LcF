@@ -5,23 +5,31 @@ let config = {
 
   // 数据库mysql配置
   db: {
-    
+
   },
 
   // session配置
-  session : {
-    secret : 'qweasdzxcrtyfghvbn'
+  session: {
+    secret: 'qweasdzxcrtyfghvbn'
   },
 
   // web站点port
-  port : 9000,
+  port: 9000,
 
   // rpc配置
-  rpc : {
-    host : '',
-    port : '',
-    protos_path: path.join(__dirname , './../grpc/protos'),
-    routes_path: path.join(__dirname, './../server/routes')
+  rpc: {
+
+    server: {
+      host: '0.0.0.0',
+      port: '10001',
+    },
+
+    client: {
+      host: '127.0.0.1',
+      port: '10001',
+    },
+
+    protos_path: path.join(__dirname, './../grpc/protos')
   }
 
 }

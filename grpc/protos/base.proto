@@ -4,14 +4,14 @@ package base;
 
 service base {
 
-  // 获取app信息
-  rpc getAppInfo (Request) returns (Response);
+  // demo方法
+  rpc demoMethod (Request) returns (Response);
 
 }
 
 // 定义请求结构
 message Request {
-  string appId  = 1;
+  string uid  = 1;
   string body  = 2;
 }
 
