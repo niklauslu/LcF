@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 // const webpackHot = 'webpack-hot-middleware/client?noInfo=true&reload=true'
-const env = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev'
+// const env = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev'
 
 const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
 

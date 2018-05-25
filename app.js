@@ -8,6 +8,7 @@ const fs = require('fs')
 const config = require('./config') // 加载配置文件
 const env = process.env.NODE_ENV ? process.env.NODE_ENV :'production'
 console.log('NODE_ENV:' + env)
+const version = require('./package.json').version
 
 // webpack
 if (env == 'dev') {
@@ -98,6 +99,10 @@ app.use(methodOverride('_method'))
 const logReqMid = require('./app/middleware/log_req')
 app.use(logReqMid)
 
+app.use((req , res , next) => {
+  res.locals.VERSION = env == 'production' ? version : Date.now()
+  next()
+})
 // 添加控制层逻辑
 const controller = require('./lib/boot')
 controller(app, {
