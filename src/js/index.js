@@ -1,12 +1,12 @@
+import Vue from 'vue'
+import App from './../vue/app.vue'
+
 import './../less/index.less'
 
-class a {
-  init() {
-    
-    $('#test').on('click' , function () {  
-      console.log('abbbbbbb')
-    })
+//创建一个vue实例,挂载在#app上面  
+new Vue({
+  el: '#app',
+  components: {
+    App
   }
-}
-let A = new a()
-A.init()
+})

@@ -21,6 +21,9 @@ const JsFileName = HASH ? '[name].[chunkhash].js' : '[name].js'
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
+// vue-loader插件
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const extractCSS = new ExtractTextPlugin(CSS_OUTPUT_PATH + CssFileName)
@@ -62,6 +65,11 @@ let config = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: ["babel-loader"]
+      },
+      {
+        test: /\.vue$/,
+        exclude: /node_modules/,
+        use: ['vue-loader']
       }
     ]
   },
@@ -76,8 +84,9 @@ let config = {
     //   template: "src/view/index.html"
     // }),
     new webpack.ProvidePlugin({
-      $: 'jquery'
-    })
+      // $: 'jquery'
+    }),
+    new VueLoaderPlugin()
   ],
   optimization: {
     splitChunks: {
@@ -88,6 +97,11 @@ let config = {
           minChunks: 2
         }
       }
+    }
+  },
+  resolve: {
+    alias: {
+      'vue': 'vue/dist/vue.js'
     }
   }
 
