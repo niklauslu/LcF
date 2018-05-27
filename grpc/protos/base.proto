@@ -1,0 +1,24 @@
+syntax='proto3';
+
+package base;
+
+service base {
+
+  // demo方法
+  rpc demoMethod (Request) returns (Response);
+
+}
+
+// 定义请求结构
+message Request {
+  string uid  = 1;
+  string body  = 2;
+}
+
+// 定义返回结构
+message Response {
+  int32 code  = 1;
+  string data = 2;
+  string msg  = 3;
+  int32 time = 4;
+}

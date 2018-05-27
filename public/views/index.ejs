@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= title %></title>
+    <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/index.css?v=<%= VERSION %>">
   </head>
   <body>
-    <h1>HELLO WORLD!</h1>
+    <div id="app">
+      <App v-for="post in posts" :title="post.title" ></App>
+    </div>
+    
+    <script src="/assets/js/vender.js?v=<%= VERSION %>"></script>
+    <script src="/assets/js/index.js?v=<%= VERSION %>"></script>
   </body>
 </html>

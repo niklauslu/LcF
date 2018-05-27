@@ -3,19 +3,22 @@
 ### 文件目录结构
 
 项目目录结构设计
+
 ```
 project
 |--app                                   // web服务应用目录
     |--controller                        // 控制器目录 (C)
     |--middleware                        // 中间件
-    |--service                           
+    |--service
 |--build                                 // 前端打包构建
 |--config                                // 配置文件目录
     |--index.js
     |--dev.js
     |--prod.js
-|--docs                                  
+|--docs                                  // 文档相关
 |--grpc                                  // rpc相关
+    |--protos                            // grpc proto文件目录
+    |--index.js                          // grpc封装
 |--logs                                  // 日志文件
 |--lib                                   // lib核心文件目录
 |--node_modules
@@ -32,7 +35,8 @@ project
     |--images
     |--js
     |--less
-    |--template
+    |--template                          // 模板目录(ejs)
+    |--vue                               // vue文件目录
 |--tests                                 // 测试文件夹
 |--utils                                 // 公共方法，工具类
 |--.babelrc
@@ -50,3 +54,49 @@ project
 > 在`mac`和`linux`环境，设置`logs`,`public/uploads`文件夹权限为`777`
 
 ### 架构设计
+
+### 配置文件
+
+`config/index.js`
+
+```js
+const fs = require('fs')
+const path = require('path')
+
+let config = {
+
+  // 数据库mysql配置
+  db: {
+    host: '', 
+    port: 3306,
+    dbname: '',
+    username: '',
+    password: '',
+    maxLimit: 10,
+  },
+
+  // session配置
+  session : {
+    secret : ''
+  },
+
+  // web站点port
+  port : 8000
+
+}
+
+// 配置文件可根据部署环境的不同加载对应环境的配置文件
+let env = process.env.NODE_ENV ? process.env.NODE_ENV : ''
+
+if (env) {
+  if (fs.existsSync(path.join(__dirname, './' + env + '.js'))) {
+    let extendsConfig = require('./' + env)
+    if (extendsConfig) {
+      config = Object.assign(config, extendsConfig)
+    }
+  }
+
+}
+
+module.exports = config
+```

@@ -9,20 +9,17 @@
     "js": "node"
   },
   "watch": [
-    "app/",
-    "sdk/",
-    "lib/",
-    "config/",
-    "app.js",
-    "api.js"
-
+    "app/*"
   ],
   "ignore": [
     ".svn",
     ".git",
     ".idea",
     "node_modules/",
-    "app/views"
+    "app/views",
+    "src/*",
+    "js/*",
+    "css/*"
   ],
   "ext": "js jade json"
 }

@@ -1,17 +1,17 @@
-# 构建一个MVC架构web服务
+# 构建web服务
 
 ### 1.利用express搭建简单的web服务
 
 Express 是一个基于 Node.js 平台的极简、灵活的 web 应用开发框架，利用它来搭建一个Web服务是很方便快速并且高效的，只需要几个简单的步骤
 
 第一步：安装express 
-```
+```node
 npm install express --save
 ```
 
 第二步：新建文件入口文件`app.js`
 
-```
+```js
 const express = require('express')
 const app = express()
 
@@ -38,17 +38,17 @@ express本身是一个极其简单的框架，它之所以强大，就在于它�
 ##### 2.1.1 请求处理
 
 首页我们需要一个`body-parser`中间件处理请求中body的内容
-```
+```node
 npm install body-parser --save
 ```
 
 加上`method-override`支持更多的请求方式（PUT,DELETE）等
-```
+```node
 npm install method-override --save
 ```
 
 然后再`app.js`中加上
-```
+```js
 
 ... 
 
@@ -77,12 +77,13 @@ app.use(methodOverride('_method'))
 ```
 
 ##### 2.2.2 session支持
-```
+
+```node
 npm install express-session --save
 ```
 
 `app.js`添加
-```
+```js
 ...
 
 const session = require('express-session') // session中间件
@@ -99,7 +100,7 @@ app.use(session({
 
 ##### 2.2.3 静态资源文件
 静态文件使用express自带中间件
-```
+```js
 ...
 
 // 静态文件
@@ -110,8 +111,10 @@ app.use('/uploads', express.static(path.join(__dirname, './public/uploads')))
 ```
 
 #### 2.2 错误处理
+
 错误处理自己构建中间件方法，在`app/middleware`文件夹建立`error.js`
-```
+
+```js
 /**
  * 错误处理中间件类
  */
@@ -157,7 +160,7 @@ module.exports = new ErrorMid()
 ```
 
 在`app.js`中引用
-```
+```js
 ...
 
 // 错误处理
@@ -176,10 +179,8 @@ app.use(ErrorMid.error404) // 404错误
 express除了中间件，还有一块很重要的就是路由，实现controller控制层的主要工作就是做路由的逻辑处理
 
 在`lib`文件夹下建立核心文件`boot.js`
-```
-/**
- * contoller router 控制器
- */
+
+```js
 
 let fs = require('fs')
 let path = require('path')
@@ -213,8 +214,9 @@ let controller = (app, options) => {
 
 module.exports = controller
 ```
+
 在`app.js`中引用
-```
+```js
 ...
 
 // 添加控制层逻辑
@@ -229,11 +231,14 @@ controller(app, {
 #### 3.2 View视图层
 
 模板引擎使用`EJS`
-```
+
+```node
 npm install ejs --save
 ```
+
 在`app.js`添加
-```
+
+```js
 ...
 
 // 使用ejs末班引擎
@@ -243,8 +248,10 @@ app.set('views', path.join(__dirname, './public/views'))
 
 ...
 ```
+
 若是习惯使用html文件课改为
-```
+
+```js
 ...
 
 app.set('views', path.join(__dirname, './public/views'))
@@ -260,5 +267,5 @@ app.set('view engine' , 'html')
 
 ### 其他相关
 
-+ 日志处理单独见[日志处理]()
++ 日志处理单独见[日志处理](https://github.com/niklauslu/LcF/wiki/%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86)
 + model整合数据库见[Sequelize整合mysql数据库]()
